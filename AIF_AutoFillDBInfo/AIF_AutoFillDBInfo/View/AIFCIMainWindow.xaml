@@ -1,0 +1,398 @@
+﻿<Window x:Class="AIFAutoFillDB.View.AIFCIMainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:AIFAutoFillDB.View"
+    xmlns:common="clr-namespace:AIFAutoFillDB.Common"
+    xmlns:service="clr-namespace:AIFAutoFillDB.Service"   
+    xmlns:p = "clr-namespace:AIFAutoFillDB.Properties"
+    WindowStartupLocation="CenterScreen"    
+    common:WindowCloseBehavior.Closing="{Binding WindowClosingCommand}"                                   
+    common:WindowCloseBehavior.CancelClosing="{Binding WindowCancelClosingCommand}"
+    FlowDirection="{Binding Textflowdirection}"
+    Title="AIF - Collect Customer Infomation" TextBlock.TextAlignment="Center" 
+    Height="650" Width="1024" MinHeight="560" MinWidth="900"        
+    ResizeMode="CanResizeWithGrip"
+    WindowStyle="None"
+    Background="Transparent"
+    MouseDown="Window_MouseDown" >
+    <Window.InputBindings>
+            <!--<KeyBinding Key="Right" Command="{Binding BenefitsCommand}" CommandParameter="{Binding}"/>
+            <KeyBinding Key="Left" Command="{Binding BenefitsBackCommand}" CommandParameter="{Binding}"/>-->
+        <KeyBinding Command="{Binding ToNewTBWindowCommand}" CommandParameter="{Binding}" Modifiers="Ctrl" Key="N"/>
+    </Window.InputBindings>
+    <!--<Window.Background>
+        <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+            <GradientStop Color="#FFFFC934" Offset="0.567"/>
+        </LinearGradientBrush>
+    </Window.Background>-->
+    <Window.Resources>
+        <VisualBrush x:Key="TextureBrush" TileMode="Tile" Viewport="0,0,5,5"
+                   Viewbox="0,0,10,10" ViewportUnits="Absolute" 
+                   ViewboxUnits="Absolute">
+            <VisualBrush.Visual>
+                <Line X1="0" X2="10" Y1="0" Y2="10" Stroke="DarkGray"/>
+            </VisualBrush.Visual>
+        </VisualBrush>
+        <DataTemplate x:Key="HomeUCTemplate" >
+            <view:HomeUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="LoginUCTemplate" >
+            <view:AIF_LoginUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="MyCasesUCTemplate" >
+            <view:MyCasesUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="MyPersonsUCTemplate" >
+            <view:MyPersonUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="PersonalInfoUCTemplate" >
+            <view:PersonalInfoUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="CalculateTDSRUCTemplate" >
+            <view:CalculateTDSRUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="IncomesUCTemplate" >
+            <view:IncomesUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="AssetsUCTemplate" >
+            <view:AssetsUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="LiabilitiesUCTemplate" >
+            <view:LiabilitiesUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="LoanUCTemplate" >
+            <view:LoanUC/>
+        </DataTemplate>
+        <DataTemplate x:Key="InvestmentUCTemplate" >
+            <view:InvestmentUC/>
+        </DataTemplate>
+        <Style x:Key="UCStyle" TargetType="{x:Type ContentControl}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.PersonalInfo}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource PersonalInfoUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.CalculateTDSR}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource CalculateTDSRUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Incomes}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource IncomesUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Assets}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource AssetsUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Liabilities}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource LiabilitiesUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Loan}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource LoanUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Investment}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource InvestmentUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+                <!--<DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Band}">
+                    <DataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource BandUCTemplate}" />
+                    </DataTrigger.Setters>
+                </DataTrigger>-->
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LoginUCStyle" TargetType="{x:Type ContentControl}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Login}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource LoginUCTemplate}" />
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.MyCases}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource MyCasesUCTemplate}" />
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.MyPersons}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource MyPersonsUCTemplate}" />
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    <Grid Background="Gold">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="2" Grid.RowSpan="3" Source="..\Image\AIFinancial.png" Stretch="Fill" VerticalAlignment="Stretch" Margin="3,0,3,3"/>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Background="Black">
+            <!--Window title-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="1" Source="..\Image\AI-Financial-Logo.ico" Stretch="UniformToFill" Height="26"/>
+            <TextBlock Grid.Column="3" Text="AIF - Collect Customer Infomation" Foreground="White" VerticalAlignment="Center" FontSize="18" FontFamily="../Font/#Roboto Medium" Margin="10,0,0,0"/>
+            <StackPanel Grid.Column="7" Grid.ColumnSpan="5" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,8,0,0">
+                <Button Background="Transparent" Style="{StaticResource MinimizeWindow}" Command="{Binding MinimizeWindowCommand}" Padding="0" Content=""  FontSize="18" Foreground="#FFFF5A5A" Height="26" Width="26"/>
+                <Button Background="Transparent" Style="{StaticResource MaximizeWindow}" Command="{Binding MaximizeWindowCommand}" Padding="0" Content=""  FontSize="18" Foreground="#FFFF5A5A" Height="26" Width="26" Margin="10,0,0,0"/>
+                <Button VerticalAlignment="Top" Background="Transparent" Style="{StaticResource CloseWindow}" Command="{Binding CloseWindowCommand}" Padding="0" Content=""  FontSize="18" Foreground="#FFFF5A5A" Height="26" Width="26" Margin="10,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle  Grid.Column="2" Width="2" Fill="Green" VerticalAlignment="Stretch" Stroke="Gold" HorizontalAlignment="Left"/>
+            <!--<Button Grid.Row="1" Grid.Column="0" Content="主页" Style="{DynamicResource HomeButtonStyle}" Command="{Binding NavToHomeCommand}" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+        <Border Grid.Row="2" Grid.RowSpan="5" Grid.Column="0" Margin="10,5,10,10" CornerRadius="10" Background="Black" BorderBrush="Gray" BorderThickness="2"/>-->
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="1"  Content="My Cases &#x261C;" FontSize="15" Foreground="White" Background="{StaticResource MainColor}" FontWeight="Bold" HorizontalContentAlignment="Left" Padding="6,3,0,3"
+                        Command="{Binding NavigateToMyCasesCommand}"/>
+                <!--<Label Grid.Row="1"  Content="My Cases" FontSize="15" Foreground="{StaticResource MainColor}" FontWeight="Bold"/>-->
+                <!--<Button x:Name="MenuMyAccounts" Grid.Row="3" Content="My Accounts" ToolTip="My Customer Accounts" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToPersonalInfoCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.PersonalInfo}">
+
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>-->
+                <!--<Button x:Name="MenuMyCustomers" Grid.Row="5" Content="My Customers" ToolTip="My Customers" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToCalculateTDSRCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.CalculateTDSR}">
+
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>-->
+                <Label Grid.Row="7"  Content="Person" FontSize="15" Foreground="{StaticResource MainColor}" FontWeight="Bold"/>
+                <Button x:Name="MenuPersonalInfo" Grid.Row="9" Content="Personal Info" ToolTip="Personal Infomation" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToPersonalInfoCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.PersonalInfo}">
+
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="MenuTDSR" Grid.Row="11" Content="Calculate TDSR" ToolTip="Income, Assets, Liabilities Infomation" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToCalculateTDSRCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.CalculateTDSR}">
+
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="MenuKYC" Grid.Row="13" Content="KYC Q &amp; A" ToolTip="Income Infomation" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToKYCCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.KYC}">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <!--<Button x:Name="MenuAssets" Grid.Row="7" Content="Assets" ToolTip="Assets Infomation" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToAssetsCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="#0A2653"/>
+                        <Setter Property="BorderBrush" Value="#0A2653"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.Assets}">
+
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="#0A2653"/>
+
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="MenuLiabilities" Grid.Row="9" Content="Liabilities" ToolTip="Liabilities Infomation" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToLiabilitiesCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="#0A2653"/>
+                        <Setter Property="BorderBrush" Value="#0A2653"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.Liabilities}">
+
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="#0A2653"/>
+
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>-->
+                <Label Grid.Row="15"  Content="Application" FontSize="15" Foreground="{StaticResource MainColor}" FontWeight="Bold"/>
+                <Button x:Name="MenuLoan" Grid.Row="17" Content="Loan" ToolTip="Apply Loan" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToLoanCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.Loan}">
+
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="MenuInvestment" Grid.Row="19" Content="Investment" ToolTip="Apply Investment" Width="120" Padding="5,5" 
+                    Command="{Binding NavigateToInvestmentCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImageTextStyle}">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#0A2653"/>
+                            <Setter Property="BorderBrush" Value="#0A2653"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=UCName,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static common:UCNameEnum.Investment}">
+
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#0A2653"/>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+            </Grid>
+            <ContentControl Grid.Column="3" Content="{Binding}" Style="{StaticResource UCStyle}" Focusable="False"/>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.Login}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.MyCases}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=UCName}" Value="{x:Static common:UCNameEnum.MyPersons}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+        <ContentControl Grid.Row="2" Content="{Binding}" Style="{StaticResource LoginUCStyle}" Focusable="False"/>
+
+    </Grid>
+
+</Window>

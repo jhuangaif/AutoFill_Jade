@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA9398DC-F88B-4797-B1CE-4485AEC7A18C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIFAutoFillDB</RootNamespace>
+    <AssemblyName>AIF_AutoFillFromDB</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AI-Financial-Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net45\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net45\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net45\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\netstandard1.1\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\ZstdNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common\DateConverter.cs" />
+    <Compile Include="Common\ClickBehavior.cs" />
+    <Compile Include="Common\HMACSHA1Util.cs" />
+    <Compile Include="Common\LostFocusBehavior.cs" />
+    <Compile Include="Common\PasswordBoxHelper.cs" />
+    <Compile Include="Common\StringUtil.cs" />
+    <Compile Include="Common\TextChangedBehavior.cs" />
+    <Compile Include="Common\WindowCloseBehavior.cs" />
+    <Compile Include="Model\AccountInfo_Loan.cs" />
+    <Compile Include="Model\Transfer.cs" />
+    <Compile Include="Model\OwnFund.cs" />
+    <Compile Include="Model\AccountInfo_OwnFunds.cs" />
+    <Compile Include="Model\AccountInfo_Transfer.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Advisor.cs" />
+    <Compile Include="Model\AgentInfo.cs" />
+    <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\LookUpInfo.cs" />
+    <Compile Include="Model\Asset.cs" />
+    <Compile Include="Model\Beneficiary.cs" />
+    <Compile Include="Model\Cheque.cs" />
+    <Compile Include="Model\Contracts.cs" />
+    <Compile Include="Model\Employment.cs" />
+    <Compile Include="Model\Families.cs" />
+    <Compile Include="Model\Funds.cs" />
+    <Compile Include="Model\FundTransaction.cs" />
+    <Compile Include="Model\ButtonTab.cs" />
+    <Compile Include="Model\ID.cs" />
+    <Compile Include="Model\Income.cs" />
+    <Compile Include="Model\Investment.cs" />
+    <Compile Include="Model\KYC.cs" />
+    <Compile Include="Model\Liability.cs" />
+    <Compile Include="Model\Loan.cs" />
+    <Compile Include="Model\LoginAccount.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\PersonApplications.cs" />
+    <Compile Include="Model\SwitchFundConditions.cs" />
+    <Compile Include="Service\DataBaseService.cs" />
+    <Compile Include="ViewModel\AssetsViewModel.cs" />
+    <Compile Include="Service\AutoFillService.cs" />
+    <Compile Include="ViewModel\CalculateTDSRViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MyPersonViewModel.cs" />
+    <Compile Include="ViewModel\MycasesViewModel.cs" />
+    <Compile Include="ViewModel\PersonalInfoViewModel.cs" />
+    <Compile Include="ViewModel\IncomesViewModel.cs" />
+    <Compile Include="ViewModel\InvestmentViewModel.cs" />
+    <Compile Include="ViewModel\LoanViewModel.cs" />
+    <Compile Include="ViewModel\LiabilitiesViewModel.cs" />
+    <Compile Include="View\BeneficiaryUC.xaml.cs">
+      <DependentUpon>BeneficiaryUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AIF_LoginUC.xaml.cs">
+      <DependentUpon>AIF_LoginUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChequeUC.xaml.cs">
+      <DependentUpon>ChequeUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddressUC.xaml.cs">
+      <DependentUpon>AddressUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChannelUC.xaml.cs">
+      <DependentUpon>ChannelUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmploymentUC.xaml.cs">
+      <DependentUpon>EmploymentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FamilyUC.xaml.cs">
+      <DependentUpon>FamilyUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\IncomesUC.xaml.cs">
+      <DependentUpon>IncomesUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LiabilitiesUC.xaml.cs">
+      <DependentUpon>LiabilitiesUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AssetsUC.xaml.cs">
+      <DependentUpon>AssetsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\IDUC.xaml.cs">
+      <DependentUpon>IDUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InvestToUC.xaml.cs">
+      <DependentUpon>InvestToUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TransferUC.xaml.cs">
+      <DependentUpon>TransferUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnfundUC.xaml.cs">
+      <DependentUpon>OwnfundUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyPersonUC.xaml.cs">
+      <DependentUpon>MyPersonUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyCasesUC.xaml.cs">
+      <DependentUpon>MyCasesUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonalInfoUC.xaml.cs">
+      <DependentUpon>PersonalInfoUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CalculateTDSRUC.xaml.cs">
+      <DependentUpon>CalculateTDSRUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoanUC.xaml.cs">
+      <DependentUpon>LoanUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InvestmentUC.xaml.cs">
+      <DependentUpon>InvestmentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AIFCIMainWindow.xaml.cs">
+      <DependentUpon>AIFCIMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Style\MyControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BeneficiaryUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AIF_LoginUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ChequeUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddressUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ChannelUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EmploymentUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FamilyUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\IncomesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LiabilitiesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AssetsUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\IDUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InvestToUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TransferUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OwnfundUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MyPersonUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MyCasesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PersonalInfoUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CalculateTDSRUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LoanUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InvestmentUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\HomeUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppHelper.cs" />
+    <Compile Include="Common\CommandBase.cs" />
+    <Compile Include="Common\NotifyBase.cs" />
+    <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="Service\DebugService.cs" />
+    <Compile Include="Service\VMService.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="View\HomeUC.xaml.cs">
+      <DependentUpon>HomeUC.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\AIFCIMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="files\client-cert.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="files\client-key.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="files\server-ca.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="files\ai-financial-333500-0d35607195ee.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="files\CloudProxy.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\AI-Financial-Logo.ico" />
+    <Resource Include="Image\AIFinancial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AI-Financial-Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\app_Boy.png" />
+    <Resource Include="Image\app_Girl.png" />
+    <Resource Include="Image\app_Man.png" />
+    <Resource Include="Image\app_Woman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\NonReg.png" />
+    <Resource Include="Image\RESP.png" />
+    <Resource Include="Image\RRSP.png" />
+    <Resource Include="Image\TFSA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Joint.png" />
+    <Resource Include="Image\Single.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="files\cloud_sql_proxy_x64.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

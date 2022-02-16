@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="AIFAutoFillDB.View.InvestToUC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:common="clr-namespace:AIFAutoFillDB.Common"
+        mc:Ignorable="d" 
+        Background="White"
+        d:DesignHeight="500" 
+        d:DesignWidth="900" FocusVisualStyle="{x:Null}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <!--<Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource MainColor}"/>-->
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MainColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lb_PersonalInfo" Grid.Column="3" Text="Personal Information" Foreground="white" FontSize="28" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Margin="0,0,10,0" />
+                <ListBox Grid.Column="1" ItemContainerStyle="{StaticResource ButtonListStyle}"
+                     ItemsSource="{Binding ApplicantbuttonList,UpdateSourceTrigger=PropertyChanged}"
+                     FocusVisualStyle="{x:Null}"
+                     VerticalAlignment="Bottom"  HorizontalAlignment="Stretch"
+                     BorderThickness="0" Background="Transparent"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+            </Grid>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Button Content="Delete" Width="100" FontSize="16" Background="#FFD500" Foreground="{StaticResource MainColor}" FontWeight="Bold"
+                        HorizontalAlignment="Left" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{StaticResource MainColor}"  Margin="0,0,20,0"
+                        ToolTip="Delete Personal Infomation" Padding="5,5"
+                    Command="{Binding DeletePersonalInfoCommand}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>                
+                <Button Content="Save" Width="100" FontSize="16" Background="#15a763" Foreground="{StaticResource MainColor}" FontWeight="Bold"
+                        HorizontalAlignment="Left" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{StaticResource MainColor}"
+                        ToolTip="Save Personal Infomation" Padding="5,5"
+                    Command="{Binding SavePersonalInfoCommand}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <ScrollViewer Grid.Row="4" Foreground="White" Background="{StaticResource MainColor}"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"  
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"  
+                      FocusVisualStyle="{x:Null}" Style="{StaticResource FavsScrollViewer}">
+                <ListBox Background="Transparent" 
+                     FocusVisualStyle="{x:Null}"
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     BorderThickness="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource PersonInfoListStyle}">
+                            <Setter Property="ListBoxItem.FocusVisualStyle"  Value="{x:Null}" />                            
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="ItemsSource"  Value="{Binding ApplicantInfoList,UpdateSourceTrigger=PropertyChanged}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsApplicantvisible,UpdateSourceTrigger=PropertyChanged}" Value="false">
+                                    <Setter Property="ItemsSource"  Value="{Binding CoApplicantInfoList,UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.Style>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <Border>
+                                <ItemsPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <!--<Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource MainColor}"/>-->
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MainColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0" ItemContainerStyle="{StaticResource ButtonListStyle}"
+                     ItemsSource="{Binding ButtonList,UpdateSourceTrigger=PropertyChanged}"
+                     FocusVisualStyle="{x:Null}"
+                     VerticalAlignment="Bottom"  HorizontalAlignment="Stretch"
+                     BorderThickness="0" Background="Transparent"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+                <Label Grid.Column="2" Content="Verify Date" Foreground="White" FontSize="14" Height="36" 
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Right"/>
+                <DatePicker Grid.Column="4" 
+                        VerticalAlignment="Center" HorizontalAlignment="Left"
+                        Height="{Binding ActualHeight,ElementName=lb_LastName}"  
+                        Width="{Binding ActualWidth,ElementName=TaxStatus}"  
+                        VerticalContentAlignment="Center" />
+            </Grid>
+            <ContentControl Grid.Row="2" Content="{Binding}" Style="{StaticResource AccompanyUCStyle}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <!--<ContentControl Grid.Row="2" Content="{Binding}" ContentTemplate="{StaticResource IDUCTemplate}" Focusable="False">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=AccompanyUC}" Value="{x:Static common:AccompanyUCNameEnum.ID}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                        
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>-->
+
+        </Grid>
+    </Grid>
+</UserControl>

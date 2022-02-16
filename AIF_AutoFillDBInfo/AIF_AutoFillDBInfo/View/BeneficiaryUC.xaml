@@ -1,0 +1,200 @@
+﻿<UserControl x:Class="AIFAutoFillDB.View.BeneficiaryUC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:common="clr-namespace:AIFAutoFillDB.Common"
+        mc:Ignorable="d" 
+        d:DesignHeight="500" 
+        d:DesignWidth="900" FocusVisualStyle="{x:Null}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Content="Living Status" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="3" Content="Country" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="5" Content="Province" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="7" Content="City" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="7" Orientation="Horizontal">
+            <Label Content="Apart No" Foreground="{StaticResource MainColor}" FontSize="14" Width="80" Margin="0,0,10,0"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+            <Label Content="Street No" Foreground="{StaticResource MainColor}" FontSize="14" Width="80" Margin="0,0,10,0"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+            <Label  Content="Street Name" Foreground="{StaticResource MainColor}" FontSize="14" Width="250"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        </StackPanel>
+        <Label Grid.Row="0" Grid.Column="17" Content="Start Date" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="19" Content="End Date" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="21" Content="Current Flag" Foreground="{StaticResource MainColor}" FontSize="14"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Left"/>
+        <Rectangle Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="22" VerticalAlignment="Bottom" Height="1" Fill="{StaticResource MainColor}"/>
+
+        <ComboBox x:Name="LivingStatus" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                      ItemsSource="{Binding LivingStatusType, Mode=OneWay}"                       
+                      SelectedValue="{Binding Paddress.LivingStatus,UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Grid.Row="4" Grid.Column="3" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                      ItemsSource="{Binding Country, Mode=OneWay}"                       
+                      SelectedValue="{Binding Paddress.Country,UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                      ItemsSource="{Binding Province, Mode=OneWay}"                       
+                      SelectedValue="{Binding Paddress.Province,UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Grid.Row="4" Grid.Column="7" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                      ItemsSource="{Binding City, Mode=OneWay}"                       
+                      SelectedValue="{Binding Paddress.City,UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Row="4" Grid.Column="9" Grid.ColumnSpan="7" Orientation="Horizontal">
+            <TextBox  BorderThickness="1" TextAlignment="Left" Width="80" Margin="0,0,10,0"
+                 Text="{Binding Paddress.AptNo,UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                 ToolTip="Apart No" Style="{StaticResource NameTextBoxStyle}"
+                 FocusVisualStyle="{x:Null}"           
+                 common:ViewModelBase.NameTextBox="{Binding RelativeSource={RelativeSource Self}}"                     
+                 MaxLength="100" FontSize="15" Foreground="{StaticResource MainColor}"/>
+            <TextBox  BorderThickness="1" TextAlignment="Left" Width="80" Margin="0,0,10,0"
+                 Text="{Binding Paddress.StreetNo,UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                 ToolTip="Street No" Style="{StaticResource NameTextBoxStyle}"
+                 FocusVisualStyle="{x:Null}"           
+                 common:ViewModelBase.NameTextBox="{Binding RelativeSource={RelativeSource Self}}"                     
+                 MaxLength="100" FontSize="15" Foreground="{StaticResource MainColor}"/>
+            <TextBox BorderThickness="1" TextAlignment="Left" Width="250"
+                 Text="{Binding Paddress.StreetName,UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                 ToolTip="Street Name" Style="{StaticResource NameTextBoxStyle}"
+                 FocusVisualStyle="{x:Null}"           
+                 common:ViewModelBase.NameTextBox="{Binding RelativeSource={RelativeSource Self}}"                     
+                 MaxLength="100" FontSize="15" Foreground="{StaticResource MainColor}"/>
+        </StackPanel>
+        <DatePicker Grid.Row="4" Grid.Column="17"
+                        SelectedDate="{Binding Paddress.StartDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Center" >
+            <DatePicker.Resources>
+                <Style TargetType="{x:Type DatePickerTextBox}">
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <TextBox Text="{Binding Path=SelectedDate, StringFormat='yyyy-MM-dd', RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, Converter={StaticResource DateConverter1}}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <DatePicker Grid.Row="4" Grid.Column="19"
+                        SelectedDate="{Binding Paddress.EndDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Center" >
+            <DatePicker.Resources>
+                <Style TargetType="{x:Type DatePickerTextBox}">
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <TextBox Text="{Binding Path=SelectedDate, StringFormat='yyyy-MM-dd', RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, Converter={StaticResource DateConverter1}}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <!--<CheckBox Grid.Row="4" Grid.Column="21" Height="28" IsChecked="{Binding Paddress.Current_Flag}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+        <Viewbox Grid.Row="4" Grid.Column="21" HorizontalAlignment="Center" VerticalAlignment="Center" Height="{Binding Path=ActualHeight, ElementName=LivingStatus}">
+            <CheckBox IsChecked="{Binding Paddress.Current_Flag,UpdateSourceTrigger=PropertyChanged}"/>
+        </Viewbox>
+
+        <Button Grid.Row="0" Grid.Column="25" Content="Add" Width="70" FontSize="16" Background="#15a763" Foreground="{StaticResource MainColor}" FontWeight="Bold"
+                HorizontalAlignment="Left" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{StaticResource MainColor}"
+                ToolTip="Add address to person information." Command="{Binding AddPersonAddressCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Rectangle Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="22" VerticalAlignment="Center" Height="1" Fill="{StaticResource MainColor}"/>
+
+        <Border Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="22" CornerRadius="5" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{StaticResource MainColor}">
+
+            <ScrollViewer Grid.Row="4" Foreground="White" Background="{StaticResource MainColor}" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"  
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"  
+                      FocusVisualStyle="{x:Null}" Style="{StaticResource FavsScrollViewer}">
+                <ListBox ItemsSource="{Binding PAddressList,UpdateSourceTrigger=PropertyChanged}"
+                         Background="Transparent" FocusVisualStyle="{x:Null}"
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource PAddressListStyle}">
+                            <Setter Property="ListBoxItem.FocusVisualStyle"  Value="{x:Null}" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <Border>
+                                <ItemsPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                </ListBox>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

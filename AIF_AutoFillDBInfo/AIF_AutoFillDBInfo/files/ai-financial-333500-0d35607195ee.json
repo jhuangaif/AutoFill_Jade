@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ai-financial-333500",
+  "private_key_id": "0d35607195ee9f43a0cb23511d3a4824b9bb1af0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCeltJbY9m71BzG\nsM349CsWdKfEjYeR85q5Sxf4ujaO8zCWKgJXFqU7yz2xFWV/WCVeDYEDPflmKRRj\nHgzlZmiCeDUQBgKnLo7QtbwkQ5NZWY2PM+sfMt2huI9JJm4tHEu4MldcCnCsi6Ou\nbqChXUpLkqETsPM4jnbjdsgYm2GYalwRhItgVrn9LpTycZTGMwuma7+CvbesKlbM\n+y97bQIGAYVug5wKqmE51INhaU58oE0jcl5VZCDvl2KbM82SyQgyNsFhUjnkDQN+\nWyxmDTeMFIiuwyA4hIAykOWKJKMLTB/mIetRVj53ispAZGiGDI4muwgFLYE1EhPb\n6EW7v1IbAgMBAAECggEABOXt96z6VR753Th/FsYygdOMOPm8FbRwnhzPz+VZzl7R\ngdnTT62fNd0S+eIKIVLveIZclTqNS5ak5A4nYiXLFY3b6bOd0lxm7yhQeCLu1/l4\nR1ODBWgp80GYNK9aA3erw7PTrJU/91Gqy7ZBV3/iTbo+J7W1QBUaXpp/wfl5RrP5\nyQbvcjtaKXJcFpV1zGsg33dxgn/NdJKQGdvUYrHhLbYNpYDeoY6cicnIxykb8KJq\nuNGe5GZdPZtJ2dP+UbMxo2RJ2dmvZB5MoAqQdK0L39YYknplJS5S7ZWHF/b24Yyo\nuAaEAc5sTK/ySYvU2ZNrfMYymFvIq+Tgy1GOM2oxsQKBgQDaWeizJihzoSfxTcaJ\nXcYdPLxyRDH3OHTk9Y9azV+tHXbV52ymJba8Caof91DKBMObE+JQPKDQEG0t5Z0T\niqlS+0ZwhWSMVPWIWO61bXd9vfPJATcHfRZsuPIZ12xZV4BjD8flrxlmDwlFqug6\nN86qIFOb9f23mJP2YsPEpwM8KwKBgQC57v8g3Tp4w0mUnw4bofq7ib9d3I3SvjLH\nAlMzfQ2JkohdKpLSmM5dvogzckne8vVVY/B2j1GkY5PAglhg6GuBikAxur8AG03F\nFtA1jgLSi5YgSwI/caieZRhlnYHnSNEUKfDgrzBVEwsJwnkTCqaPKLJUvT+M8hDM\ncXJjJzEZ0QKBgQDVSyygC+9J/Kv68OG3AA5uMw1Whb1VZSXzHtkZdzM19WlHTJj6\nuC6IAtzX+wxFO2AklcjmXkMs3E76najSFQqQj/rgIb31w2xR86XDPpqSD0McH/60\nZwHH1OZSTfh+UZaNrjWz7VbfNmL1Vh0h+a/8yjVCTYq5lOc8sH/SEt97HwKBgQCz\nOJb9U6Ff9EWBl4sewZSQnqcyTzz5TVJel3QhZkHdQLxmqXnau2X34Icip+Bioegv\nBeUsMttsTHuIDVwpFP9DX0KfbLVc4fSlrGbHqHo5/kiYGhUxmFoDS8kncZpcmMjH\n2eGQge1ho7h5ENZpr1N7HKxAmCagslfU6Olsf8OJcQKBgHxs5kScp8ci07+w6yxT\nWzl4kD68HeMBq/h7mbm2wB/Qp3IqlNQqSJxtYjA3kES4kfiofxlKPmBRN/oH6Vm5\n7LQzsDgKrGumpuIr0tfZsNCIENWys9pu7OJj5SrGIT2y2GUaGlyhuqFmiwFhZKdN\nwIYsfzSIm7SA1iBZEGNbrG4l\n-----END PRIVATE KEY-----\n",
+  "client_email": "ai-financial-333500@appspot.gserviceaccount.com",
+  "client_id": "104926859502881822319",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ai-financial-333500%40appspot.gserviceaccount.com"
+}
